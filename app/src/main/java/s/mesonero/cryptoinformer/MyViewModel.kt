@@ -47,6 +47,6 @@ class MyViewModel: ViewModel() {
 data class CryElementState (
     val isLoading: Boolean = true,
     val error: CryAppError? = null,
-    val cryUiElement: CryUiElement? = null
+    val cryptoSimpleUiElement: CryptoSimpleUiElement? = null
 )
 

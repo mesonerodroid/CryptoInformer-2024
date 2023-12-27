@@ -4,10 +4,10 @@ data class CryptoResponseRemoteDTO (
     val rates: CryptoInfoContainerRatesRemote
 ) {
     fun toCryptoData(): AppResult<CryptoDataUi> {
-        val list = mutableListOf<CryUiElement>()
+        val list = mutableListOf<CryptoSimpleUiElement>()
         val rates = rates.getList()
         rates.onEach {
-            val uiData = CryUiElement(
+            val uiData = CryptoSimpleUiElement(
                 it?.name ?: return failureData("no_name"),
                 it.unit ?: return failureData("no_symbol"),
                 it.value)

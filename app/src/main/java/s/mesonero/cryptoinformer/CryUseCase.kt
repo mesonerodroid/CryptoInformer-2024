@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 
-class CryUseCase :CryCommonUseCase<CryUiElement>() {
+class CryUseCase :CryCommonUseCase<CryptoSimpleUiElement>() {
 
     private val repository: CryRepository = CryRepository()
     private val _cryFlow = MutableStateFlow<CryState> (CryState.Loading)
