@@ -12,11 +12,11 @@ class MyViewModel: ViewModel() {
     private val _cryFlow = MutableStateFlow<CryState> (CryState.Loading)
     val uiState: StateFlow<CryState> = _cryFlow
 
-    private val cryUseCase: CryUseCase = CryUseCase()
+    private val getCryptoInformationUseCase: GetCryptoInformationUseCase = GetCryptoInformationUseCase()
 
-    fun getVCry() {
+    fun getCriptoInfo() {
         viewModelScope.launch {
-            val result: AppResult<CryptoDataUi> = cryUseCase.getCryptoData()
+            val result: AppResult<CryptoDataUi> = getCryptoInformationUseCase.getCryptoData()
             Log.e("depuro", "Result "+result)
             result.appError?.let {
                 //_cryFlow.update {  }
@@ -30,7 +30,7 @@ class MyViewModel: ViewModel() {
 
     fun getVError() {
         viewModelScope.launch {
-            val result: AppResult<CryptoDataUi> = cryUseCase.getTheCryyyError()
+            val result: AppResult<CryptoDataUi> = getCryptoInformationUseCase.getTheCryyyError()
             Log.e("depuro", "Result "+result)
             result.appError?.let {
                 //_cryFlow.update {  }

@@ -1,22 +1,10 @@
 package s.mesonero.cryptoinformer
 
-import kotlin.coroutines.CoroutineContext
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-
-class CryRepository {
-
+class CryptoRepository {
     val cryptoRemoteDataSourceImpl = CryptoRemoteDataSourceImpl()
 
-
-    suspend fun getCry(): AppResult<CryptoDataUi> {
+    suspend fun getRepoCryptoData(): AppResult<CryptoDataUi> {
         return cryptoRemoteDataSourceImpl.getCryptoData()
-        /*
-        val result = AppResult<CryUiElement>()
-        result.data = CryUiElement(name = "nombre", "$", 34.78f)
-        return (result)
-
-         */
     }
 
     fun getCryError(): AppResult<CryptoDataUi> {

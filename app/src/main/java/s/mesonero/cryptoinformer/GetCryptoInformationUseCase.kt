@@ -1,21 +1,16 @@
 package s.mesonero.cryptoinformer
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 
-class CryUseCase :CryCommonUseCase<CryptoSimpleUiElement>() {
+class GetCryptoInformationUseCase :CryCommonUseCase< AppResult<CryptoDataUi>>() { // JUST CHANGE TO IO THREAD
 
-    private val repository: CryRepository = CryRepository()
-    private val _cryFlow = MutableStateFlow<CryState> (CryState.Loading)
-    val uiState: StateFlow<CryState> = _cryFlow
-
+    private val repository: CryptoRepository = CryptoRepository()
 
     suspend fun getCryptoData (): AppResult<CryptoDataUi> {
+        //runTask (repository.getRepoCryptoData() )
         return withContext(Dispatchers.IO) {
-            // Blocking network request code
-            return@withContext repository.getCry()
+            return@withContext repository.getRepoCryptoData()
         }
     }
 

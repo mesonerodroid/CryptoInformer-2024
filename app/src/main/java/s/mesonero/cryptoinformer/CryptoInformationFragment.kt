@@ -1,6 +1,5 @@
 package s.mesonero.cryptoinformer
 
-import android.content.res.Resources.Theme
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,26 +11,34 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -94,12 +101,12 @@ class CryptoInformationFragment : Fragment() {
     fun theFragment() {
 
         var list = listOf<CryptoSimpleUiElement>(
-            CryptoSimpleUiElement("Uno", "$", 344.67),
-            CryptoSimpleUiElement("Dos", "€", 34434.77),
-            CryptoSimpleUiElement("Tres", "J", 14344.67),
-            CryptoSimpleUiElement("Cuatro", "H", 14344.67),
-            CryptoSimpleUiElement("Cinco", "N", 14.77) ,
-            CryptoSimpleUiElement("Seis", "B", 5.12)
+            CryptoSimpleUiElement("Uno", "BTC", 344.67, "12578.98€", "13567.34$"),
+            CryptoSimpleUiElement("Dos", "ETH", 34434.77, "12578.98€", "13567.34$"),
+            CryptoSimpleUiElement("Tres", "XRP", 14344.67, "12578.98€", "13567.34$"),
+            CryptoSimpleUiElement("Cuatro", "DOT", 14344.67, "12578.98€", "13567.34$"),
+            CryptoSimpleUiElement("Cinco", "BCH", 14.77, "12578.98€", "13567.34$") ,
+            CryptoSimpleUiElement("Seis", "LINK", 5.12, "12578.98€", "13567.34$")
         )
 
         ShowList(list)
@@ -109,24 +116,40 @@ class CryptoInformationFragment : Fragment() {
     private @Composable
     fun ShowList(list: List<CryptoSimpleUiElement>) {
 
+
+        CircularProgressIndicator()
         Column(modifier = Modifier.background(MaterialTheme.colorScheme.primaryContainer)) {
+
             Image(
                 painter = painterResource(id = R.drawable.bitcoin_splash),
                 contentDescription = "test",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(2.dp, 35.dp, 2.dp, 60.dp)
+                    .fillMaxHeight(0.3f)
+                    .padding(2.dp, 35.dp, 2.dp, 20.dp)
                     .border(
                         BorderStroke(3.dp, MaterialTheme.colorScheme.secondary),
                         RoundedCornerShape(10.dp)
                     )
                     .clip(RoundedCornerShape(16.dp)),
 
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.Fit,
             )
+
+            Image(
+                painter = painterResource(id = R.drawable.reload2),
+                contentDescription = "test",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.1f)
+                    .padding(2.dp, 3.dp, 2.dp, 3.dp),
+
+                contentScale = ContentScale.Fit,
+            )
+
             Box(
                 modifier = Modifier
-                    .padding(16.dp, 10.dp, 16.dp, 80.dp)
+                    .padding(12.dp, 10.dp, 12.dp, 80.dp)
                     .clip(RoundedCornerShape(16.dp))
 
             ) {
@@ -137,7 +160,7 @@ class CryptoInformationFragment : Fragment() {
                             BorderStroke(1.dp, MaterialTheme.colorScheme.secondary),
                             RoundedCornerShape(16.dp),
                         ),
-                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 8.dp)
+                    contentPadding = PaddingValues(horizontal = 4.dp, vertical = 8.dp)
                 ) {
                     itemsIndexed(list) { index, item ->
                         HolderCryptoCurrency(item)
@@ -146,6 +169,7 @@ class CryptoInformationFragment : Fragment() {
                     }
                 }
             }
+
         }
     }
 
@@ -174,36 +198,55 @@ class CryptoInformationFragment : Fragment() {
                     }
 
             ) {
-                Text(
-                    text = it.symbol,
-                    modifier = Modifier.fillMaxWidth(0.1f),
-                    color = MaterialTheme.colorScheme.secondaryContainer,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 22.sp
-                )
+                CryptoIconImage(it.shortName)
 
-                Text(
-                    text = it.name,
-                    modifier = Modifier
-                        .fillMaxWidth(0.3f)
-                        .padding(horizontal = 3.dp),
-                    color = MaterialTheme.colorScheme.secondaryContainer,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 20.sp,
-                )
+                Column( modifier = Modifier.padding(20.dp, 0.dp, 0.dp, 0.dp)) {
+                    Text(
+                        text = it.name,
+                        modifier = Modifier.padding(horizontal = 3.dp),
+                        color = MaterialTheme.colorScheme.secondaryContainer,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 20.sp,
+                    )
 
-                Text(
-                    text = it.change.toString(),
-                    modifier = Modifier
-                        .fillMaxWidth(0.6f)
-                        .padding(horizontal = 2.dp),
-                    color = MaterialTheme.colorScheme.secondaryContainer,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 19.sp
-                )
+                    Text(
+                        text = it.rateEur,
+                        modifier = Modifier.padding(horizontal = 2.dp),
+                        color = MaterialTheme.colorScheme.secondaryContainer,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 19.sp
+                    )
+                }
             }
         }
 
+    }
+
+    @Composable
+    fun CryptoIconImage(shortName: String) {
+        var drawable = 0
+        when (shortName) {
+            "BTC" -> drawable = R.drawable.btc2
+            "ETH" -> drawable = R.drawable.eth2
+            "XRP" -> drawable = R.drawable.xrp
+            "DOT" -> drawable = R.drawable.dot2
+            "BCH" -> drawable = R.drawable.bch
+            "LINK" -> drawable = R.drawable.link2
+        }
+        
+        Box (modifier = Modifier
+            .background(Color.White, shape = CircleShape)
+            .size(52.dp, 52.dp)
+            .clip(CircleShape),
+            contentAlignment = Alignment.Center) {
+            Image(
+                painter = painterResource(id = drawable),
+                contentDescription = "test",
+                modifier = Modifier
+                    .size(37.dp, 37.dp),
+                contentScale = ContentScale.Crop
+            )
+        }
     }
 
     @Preview(showBackground = true)
@@ -214,6 +257,7 @@ class CryptoInformationFragment : Fragment() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colorScheme.background
             ) {
+
                 theFragment()
             }
         }
@@ -246,8 +290,34 @@ class CryptoInformationFragment : Fragment() {
         }
     }
 
+    @Composable
+    fun CenteredCircularProgressIndicator(visible: Boolean) = CircularProgressIndicator(
+        Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+    )
+
+    @Composable
+    fun IndeterminateCircularIndicator(state: Boolean) {
+        var loading by remember { mutableStateOf(state) }
+
+        if (state) {
+            CircularProgressIndicator(
+                modifier = Modifier.width(64.dp),
+                color = MaterialTheme.colorScheme.secondary,
+                trackColor = MaterialTheme.colorScheme.surfaceVariant,
+            )
+        }
+
+        if (!loading) return
+
+
+    }
+
     private fun showLoading() {
         Log.e("depuro", "show loading")
+    }
+    private fun hideLoading() {
     }
 
     private fun showError(error: CryAppError) {
