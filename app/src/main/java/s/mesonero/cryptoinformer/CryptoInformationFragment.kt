@@ -62,7 +62,7 @@ import kotlinx.coroutines.launch
  */
 class CryptoInformationFragment : Fragment() {
 
-    val myViewModel: MyViewModel by viewModels()
+    val cryptoInfoViewModel: CryptoInfoViewModel by viewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -278,7 +278,7 @@ class CryptoInformationFragment : Fragment() {
                 // Trigger the flow and start listening for values.
                 // Note that this happens when lifecycle is STARTED and stops
                 // collecting when the lifecycle is STOPPED
-                myViewModel.uiState.collect { uiState ->
+                cryptoInfoViewModel.uiState.collect { uiState ->
                     // New value received
                     when (uiState) {
                         is CryState.Success -> showUiData(uiState.cryptoDataUi)

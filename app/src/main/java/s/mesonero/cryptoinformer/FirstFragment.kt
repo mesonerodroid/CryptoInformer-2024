@@ -20,7 +20,7 @@ class FirstFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
 
-    val myViewModel:MyViewModel by viewModels ()
+    val cryptoInfoViewModel:CryptoInfoViewModel by viewModels ()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -43,12 +43,12 @@ class FirstFragment : Fragment() {
 
         binding.buttonFirst.setOnClickListener {
 
-            myViewModel.getCriptoInfo()
+            cryptoInfoViewModel.getCriptoInfo()
             //findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
 
         binding.buttonSecond.setOnClickListener {
-            myViewModel.getVError()
+            cryptoInfoViewModel.getVError()
         }
     }
 
@@ -61,7 +61,7 @@ class FirstFragment : Fragment() {
                 // Trigger the flow and start listening for values.
                 // Note that this happens when lifecycle is STARTED and stops
                 // collecting when the lifecycle is STOPPED
-                myViewModel.uiState.collect { uiState ->
+                cryptoInfoViewModel.uiState.collect { uiState ->
                     // New value received
                     when (uiState) {
                         is CryState.Success -> showUiData(uiState.cryptoDataUi)

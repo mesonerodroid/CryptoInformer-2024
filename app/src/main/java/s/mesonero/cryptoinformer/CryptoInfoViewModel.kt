@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class MyViewModel: ViewModel() {
+class CryptoInfoViewModel: ViewModel() {
 
     private val _cryFlow = MutableStateFlow<CryState> (CryState.Loading)
     val uiState: StateFlow<CryState> = _cryFlow
@@ -41,7 +41,6 @@ class MyViewModel: ViewModel() {
             }
         }
     }
-
 }
 
 data class CryElementState (

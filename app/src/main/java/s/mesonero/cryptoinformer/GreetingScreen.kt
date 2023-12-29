@@ -1,10 +1,7 @@
 package s.mesonero.cryptoinformer
 
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -24,8 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -34,52 +29,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.NavHostController
 import com.example.compose.AppTheme
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class GreetingComposeFragment : Fragment() {
+@Composable
+fun GreetingScreen(navigationController: NavHostController) {
 
-
-
+    val navigationController = navigationController
     // This property is only valid between onCreateView and
     // onDestroyView.
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return ComposeView(requireContext()).apply {
-            setViewCompositionStrategy(
-                ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
-            )
-            setContent {
-                AppTheme {
-                    Surface(
-                        modifier = Modifier.fillMaxSize(),
-                        color = MaterialTheme.colorScheme.background
-                    ) {
-                        theFragment()
-                    }
-                }
-            }
-        }
-    }
+    Greeting(navigationController)
+
+}
 
     @Composable
-    fun Greeting(name: String, modifier: Modifier = Modifier) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier
-        )
-    }
-
-    @Composable
-    fun theFragment() {
+    fun Greeting(navigationController: NavHostController? = null) {
         ConstraintLayout(Modifier.fillMaxSize()) {
 
             val (bigImage, bigTitleText, descriptionText, link, button) = createRefs()
@@ -173,8 +141,7 @@ class GreetingComposeFragment : Fragment() {
             )
             {
                 Text(
-                   // text = "https://www.coingecko.com/es", fontFamily = FontFamily.SansSerif,
-                    text = "", fontFamily = FontFamily.SansSerif,
+                    text = "https://www.coingecko.com/es", fontFamily = FontFamily.SansSerif,
                     fontSize = 18.sp,
                     textAlign = TextAlign.Center,
                     color = Color.Blue
@@ -193,7 +160,8 @@ class GreetingComposeFragment : Fragment() {
             )
             {
                 Button(onClick = {
-                    findNavController().navigate(R.id.cryptoInformationFragment)
+                    //navegar
+                    navigationController?.navigate(ComposeRoutes.InformationScreen.route)
                 },
                     Modifier
                         .fillMaxWidth(0.95f)
@@ -204,25 +172,18 @@ class GreetingComposeFragment : Fragment() {
 
         }
     }
-
-    @Preview(showBackground = true)
-    @Composable
-    fun Preview() {
-        AppTheme {
-            Surface(
-                modifier = Modifier.fillMaxSize(),
-                color = MaterialTheme.colorScheme.background
-            ) {
-                theFragment()
-            }
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    AppTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            Greeting()
         }
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-
+}
     private fun showLoading() {
         Log.e("depuro", "show loading")
     }
@@ -236,9 +197,3 @@ class GreetingComposeFragment : Fragment() {
         Log.e("depuro", "show ui data " + it)
 
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
-}
