@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/greetingComposeFragment"
-        android:name="s.mesonero.cryptoinformer.GreetingComposeFragment"
+        android:name="s.mesonero.cryptoinformer.ui.unused_fragments.GreetingComposeFragment"
         android:label="GreetingComposeFragment" >
         <action
             android:id="@+id/action_greetingComposeFragment_to_cryptoInformationFragment"

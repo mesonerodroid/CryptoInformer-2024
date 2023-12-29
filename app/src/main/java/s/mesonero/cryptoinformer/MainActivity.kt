@@ -10,10 +10,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.compose.AppTheme
-import s.mesonero.cryptoinformer.databinding.ActivityMainBinding
+import s.mesonero.cryptoinformer.ui.CryptoInfoViewModel
+import s.mesonero.cryptoinformer.ui.navigation.ComposeRoutes
+import s.mesonero.cryptoinformer.ui.screen.CryptoInformationScreen
+import s.mesonero.cryptoinformer.ui.screen.GreetingScreen
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
