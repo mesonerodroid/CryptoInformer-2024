@@ -16,7 +16,7 @@ Pending points:
 -Unit test
 
 
-![image](https://github.com/mesonerodroid/CryptoInformer/assets/26088162/405b4b60-1e54-429d-8547-9972abcbc2a1)
+![image](https://github.com/mesonerodroid/CryptoInformer/assets/26088162/8962dc5d-6427-49b9-9525-e2c5740e1133)
 ![image](https://github.com/mesonerodroid/CryptoInformer/assets/26088162/9e52c006-05cf-4219-9268-df480e43bf6f)
 
 
