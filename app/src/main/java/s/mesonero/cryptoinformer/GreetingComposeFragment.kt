@@ -71,19 +71,10 @@ class GreetingComposeFragment : Fragment() {
     }
 
     @Composable
-    fun Greeting(name: String, modifier: Modifier = Modifier) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier
-        )
-    }
-
-    @Composable
     fun theFragment() {
         ConstraintLayout(Modifier.fillMaxSize()) {
 
             val (bigImage, bigTitleText, descriptionText, link, button) = createRefs()
-            val topGuide = createGuidelineFromTop(0.12f)
             val midGuide = createGuidelineFromBottom(0.5f)
 
             Row(modifier = Modifier
@@ -221,21 +212,7 @@ class GreetingComposeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
-
-
-    private fun showLoading() {
-        Log.e("depuro", "show loading")
-    }
-
-    private fun showError(error: CryAppError) {
-        Log.e("depuro", "show error " + error)
-
-    }
-
-    private fun showUiData(it: CryptoDataUi) {
-        Log.e("depuro", "show ui data " + it)
-
-    }
+    
 
     override fun onDestroyView() {
         super.onDestroyView()

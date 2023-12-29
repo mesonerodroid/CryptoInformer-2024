@@ -42,10 +42,3 @@ class CryptoInfoViewModel: ViewModel() {
         }
     }
 }
-
-data class CryElementState (
-    val isLoading: Boolean = true,
-    val error: CryAppError? = null,
-    val cryptoSimpleUiElement: CryptoSimpleUiElement? = null
-)
-

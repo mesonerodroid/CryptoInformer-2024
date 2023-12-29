@@ -123,7 +123,7 @@ fun ShowList(list: List<CryptoSimpleUiElement>) {
          */
 
         ToggleStringButton(
-            modifierPassed = Modifier.align(Alignment.CenterHorizontally),
+            modifier = Modifier.align(Alignment.CenterHorizontally),
             currentSelection = Constants.FiatDescriptor.EUR.descriptor,
             toggleStates = listOf(
                 Constants.FiatDescriptor.EUR.descriptor,

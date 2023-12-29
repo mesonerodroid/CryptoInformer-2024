@@ -29,7 +29,7 @@ import com.example.compose.AppTheme
 
 @Composable
 fun ToggleStringButton(
-    modifierPassed:Modifier,
+    modifier:Modifier,
     currentSelection: String,
     toggleStates: List<String>,
     onToggleChange: (String) -> Unit
@@ -42,7 +42,7 @@ fun ToggleStringButton(
         )
     }
 
-    Row(modifier = modifierPassed
+    Row(modifier = modifier
         .height(IntrinsicSize.Min)
         //.border(BorderStroke(1.dp, Color.LightGray))) {
         .border(BorderStroke(1.dp, MaterialTheme.colorScheme.secondary))) {
@@ -90,7 +90,7 @@ fun TogglePreview() {
             modifier = Modifier.fillMaxWidth(),
             color = MaterialTheme.colorScheme.background
         ) {
-            ToggleStringButton(modifierPassed = Modifier,"EUR", states, { Log.e("depuro", "togle selected "+it)})
+            ToggleStringButton(modifier = Modifier,"EUR", states, { Log.e("depuro", "togle selected "+it)})
         }
     }
 }

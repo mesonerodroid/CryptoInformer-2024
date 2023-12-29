@@ -19,7 +19,7 @@ data class CryptoResponseRemoteDTO (
             infoRate?.type?.let { type ->
                 if (type == "crypto") {
                     val uiData = CryptoSimpleUiElement(
-                        infoRate?.name ?: return failureData("no_name"),
+                        infoRate.name ?: return failureData("no_name"),
                         infoRate.unit ?: return failureData("no_symbol"),
                         infoRate.value,
                         eurFormat(bitcoinEurValue / infoRate.value),
