@@ -7,7 +7,7 @@ Keypoints:
 -UseCase to change thread.
 -Compose navigation. 
 -Recomposing some view elements by toggle click
--Architecture layers. (Domain data model not necesary).  Screen -> Viewmodel -> UseCase -> Repository -> DataSource
+-Architecture layers DATA-DOMAIN-UI. (Domain data model not necesary).  Screen -> Viewmodel -> UseCase -> Repository -> DataSource
 
 Pending points:
 -Expand data information, more server calls.
